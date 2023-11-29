@@ -27,7 +27,7 @@ function SearchRoutes(app) {
             };
 
             const response = await axios.request(options);
-            const restaurants = response.data;
+            const restaurants = response.data.businesses;
             console.log(restaurants);
 
             res.json(restaurants);
