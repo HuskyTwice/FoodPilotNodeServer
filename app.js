@@ -13,18 +13,70 @@ const mongoose = require('mongoose');
 const url = 'mongodb+srv://teamfoodpilot:goodfood5610@foodpilot.efmu0r0.mongodb.net/FoodPilot?retryWrites=true&w=majority'
 const connectionParams={
     useNewUrlParser: true,
-    // useCreateIndex: true,
     useUnifiedTopology: true 
 }
 mongoose.connect(url,connectionParams)
     .then( () => {
         console.log('Connected to database ');
-        console.log(mongoose.Connection);
     })
     .catch( (err) => {
         console.error(`Error connecting to the database. \n${err}`);
     })
 
+// allowing picture upload
+var express = require('express')
+var app = express();
+var bodyParser = require('body-parser');
+var imgSchema = require('./model.js');
+var fs = require('fs');
+var path = require('path');
+app.set("view engine", "ejs");
+require('dotenv').config();
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+ 
+var upload = multer({ storage: storage });
+ 
+app.get('/', (req, res) => {
+    imgSchema.find({})
+    .then((data, err)=>{
+        if(err){
+            console.log(err);
+        }
+        res.render('imagepage',{items: data})
+    })
+});
+
+app.post('/', upload.single('image'), (req, res, next) => {
+ 
+    var obj = {
+        name: req.body.name,
+        desc: req.body.desc,
+        img: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+    imgSchema.create(obj)
+    .then ((err, item) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            // item.save();
+            res.redirect('/');
+        }
+    });
+});
+ 
 const app = express();
 app.use(
     cors({
@@ -46,4 +98,4 @@ console.log("Server running successfully...")
 
 SearchRoutes(app);
 UserRoutes(app);
-app.listen(4000);
+app.listen(process.env.PORT || 4000);

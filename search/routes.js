@@ -19,7 +19,7 @@ function SearchRoutes(app) {
             const options = {
                 method: 'GET',
                 url: YELP_API,
-                params: {location: location, term: food, sort_by: 'best_match', limit: '10'},
+                params: {location: location, term: food, sort_by: 'best_match', limit: '20'},
                 headers: {
                     accept: 'application/json',
                     Authorization: `Bearer ${YELP_API_KEY}`
