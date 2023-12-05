@@ -5,6 +5,7 @@ import session from "express-session";
 
 import { createRequire } from 'module';
 import UserRoutes from "./users/routes.js";
+import RestaurantRoutes from "./restaurants/routes.js";
 
 // const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/foodpilot'
 // mongoose.connect(CONNECTION_STRING);
@@ -49,6 +50,6 @@ app.get('/', (req, res) => {
 console.log("Server running successfully...")
 
 SearchRoutes(app);
-
 UserRoutes(app);
+RestaurantRoutes(app);
 app.listen(4000);
