@@ -1,22 +1,27 @@
 import * as dao from "./dao.js";
+
 function UserRoutes(app) {
   // var currentSignedInUser=null;
   const createUser = async (req, res) => {
     const user = await dao.createUser(req.body);
-      res.json(user);
-    };
-  const deleteUser = async (req, res) => {
-      const status = await dao.deleteUser(req.params.userId);
-      res.json(status);
+    res.json(user);
   };
+
+  const deleteUser = async (req, res) => {
+    const status = await dao.deleteUser(req.params.userId);
+    res.json(status);
+  };
+
   const findAllUsers = async (req, res) => {
     const users = await dao.findAllUsers();
     res.json(users);
   };
+
   const findUserById = async (req, res) => {
     const user = await dao.findUserById(req.params.userId);
     res.json(user);
   };
+
   const updateUser = async (req, res) => {
     const { userId } = req.params;
     const status = await dao.updateUser(userId, req.body);
@@ -24,6 +29,7 @@ function UserRoutes(app) {
     req.session['currentUser'] = currentUser;
     res.json(status);
   };
+
   const signup = async (req, res) => {
     const user = await dao.findUserByUsername(
       req.body.username);
@@ -35,19 +41,24 @@ function UserRoutes(app) {
     req.session['currentUser'] = currentUser;
     res.json(currentUser);
   };
+
   const signin = async (req, res) => {
     const { username, password } = req.body;
-    const currentUser = await dao.findUserByCredentials(username, password);
-    req.session['currentUser'] = currentUser;
-    res.json(currentUser);
-    // console.log("in node, current user is ", currentUser);
-    // console.log("in node, current user is set to req as ", req.session['currentUser']);
-
+    const user = await dao.findUserByCredentials(username, password);
+    if (user) {
+      const currentUser = user;
+      req.session["currentUser"] = currentUser;
+      res.json(user);
+    } else {
+      res.sendStatus(403);
+    }
   };
+
   const signout = (req, res) => {
     req.session.destroy();
     res.json(200);
-  }; 
+  };
+
   const account = async (req, res) => {
     // console.log("added to the session", req.session['currentUser']);
     // console.log("global variable is ", currentSignedInUser);
