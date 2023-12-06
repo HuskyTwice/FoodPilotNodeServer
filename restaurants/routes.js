@@ -5,15 +5,18 @@ function RestaurantRoutes(app) {
   const createRestaurant = async (req, res) => {
     const restaurant = await dao.createRestaurant(req.body);
       res.json(restaurant);
-    };
-    const deleteRestaurant = async (req, res) => {
-      const status = await dao.deleteRestaurant(req.params.restaurantId);
-      res.json(status);
   };
+
+  const deleteRestaurant = async (req, res) => {
+    const status = await dao.deleteRestaurant(req.params.restaurantId);
+    res.json(status);
+  };
+
   const findRestaurantById = async (req, res) => {
     const restaurant = await dao.findRestaurantById(req.params.restaurantId);
     res.json(restaurant);
   };
+  
   const updateRestaurant = async (req, res) => {
     const { restaurantId } = req.params;
     const status = await dao.updateRestaurant(restaurantId, req.body);
