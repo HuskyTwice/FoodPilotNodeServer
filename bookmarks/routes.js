@@ -5,7 +5,8 @@ function BookmarksRoutes(app) {
     const createUserBookmarksRestaurant = async (req, res) => {
         const userId = req.params.userId;
         const restaurantId = req.params.restaurantId;
-        const bookmarks = await dao.createUserBookmarksRestaurant(userId, restaurantId);
+        const restaurantName = req.params.restaurantName;
+        const bookmarks = await dao.createUserBookmarksRestaurant(userId, restaurantId, restaurantName);
         res.json(bookmarks);
     };
     const deleteUserBookmarksRestaurant = async (req, res) => {
@@ -23,7 +24,7 @@ function BookmarksRoutes(app) {
     };
 
     app.get("/api/bookmarks", findAllBookmarks);
-    app.post("/api/users/:userId/bookmarks/:restaurantId", createUserBookmarksRestaurant);
+    app.post("/api/users/:userId/bookmarks/:restaurantId/:restaurantName", createUserBookmarksRestaurant);
     app.delete("/api/users/:userId/bookmarks/:restaurantId", deleteUserBookmarksRestaurant);
     app.get("/api/bookmarks/:restaurantId/users", findUsersThatBookmarkRestaurant);
     app.get("/api/users/:userId/bookmarks", findRestaurantsThatUserBookmarks);
