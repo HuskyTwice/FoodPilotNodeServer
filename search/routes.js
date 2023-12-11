@@ -5,6 +5,7 @@ export const YELP_API = "https://api.yelp.com/v3/businesses";
 export const YELP_API_KEY = "3sROVy-hI2liNmYmfGPGYd1M4UTKf5WSL6-1meh27jp3Hf95glvX_-4yDEls6sIsQj4tqjCIb0-zF-8TQS1_7RJUyYGl-2gjngWUKkkWzj1fSEldRwnYBYuGqpY-XHYx"
 
 function SearchRoutes(app) {
+    // use for general search
     const findRestaurants = async (req, res) => {
         const { food } = req.params;
         const { location } = req.params;
@@ -30,6 +31,7 @@ function SearchRoutes(app) {
         }
     };
 
+    // use Yelp restaurantId not ObjectId.
     const findRestaurantById = async (req, res) => {
         const { restaurantId } = req.params;
 
