@@ -1,6 +1,7 @@
-import * as dao from "./contact/dao.js"
+import * as dao from "./dao.js"
 
 function ContactRoutes(app) {
+
     const createContact = async (req, res) => {
         const contact = await dao.createContact(req.body);
         res.json(contact);

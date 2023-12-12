@@ -8,23 +8,25 @@ import UserRoutes from "./users/routes.js";
 import RestaurantRoutes from "./restaurants/routes.js";
 import BookmarksRoutes from "./bookmarks/routes.js";
 import FollowsRoutes from "./follows/routes.js";
+import ContactRoutes from "./contact/routes.js";
+
 
 // const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/foodpilot'
 // mongoose.connect(CONNECTION_STRING);
 const require = createRequire(import.meta.url);
 const mongoose = require('mongoose');
 const url = 'mongodb+srv://teamfoodpilot:goodfood5610@foodpilot.efmu0r0.mongodb.net/FoodPilot?retryWrites=true&w=majority'
-const connectionParams={
+const connectionParams = {
     useNewUrlParser: true,
     // useCreateIndex: true,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true
 }
-mongoose.connect(url,connectionParams)
-    .then( () => {
+mongoose.connect(url, connectionParams)
+    .then(() => {
         console.log('Connected to database ');
         console.log(mongoose.Connection);
     })
-    .catch( (err) => {
+    .catch((err) => {
         console.error(`Error connecting to the database. \n${err}`);
     })
 
@@ -33,7 +35,7 @@ app.use(
     cors({
         credentials: true, // support cookies
         // restrict cross origin resource sharing to the react application
-        origin: "http://localhost:3000" 
+        origin: "http://localhost:3000"
         // origin: "https://deployment-1--keen-starlight-553a95.netlify.app"
     })
 );
@@ -57,6 +59,7 @@ SearchRoutes(app);
 UserRoutes(app);
 RestaurantRoutes(app);
 BookmarksRoutes(app);
+ContactRoutes(app);
 FollowsRoutes(app);
 
 app.listen(4000);
