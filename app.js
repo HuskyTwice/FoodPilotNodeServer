@@ -35,8 +35,8 @@ app.use(
     cors({
         credentials: true, // support cookies
         // restrict cross origin resource sharing to the react application
-        origin: "http://localhost:3000"
-        // origin: "https://deployment-1--keen-starlight-553a95.netlify.app"
+        // origin: "http://localhost:3000"
+        origin: "https://deployment-2--endearing-gumption-a4c4af.netlify.app/"
     })
 );
 const sessionOptions = {
