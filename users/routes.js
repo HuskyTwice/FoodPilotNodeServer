@@ -31,7 +31,8 @@ function UserRoutes(app) {
     // console.log("is the id?", req.params.userId);
     // console.log("in routes, id is", id);
     // console.log("in routes, newUser is", newUser);
-    // const status = await dao.updateUser(id, newUser);
+    const status = await dao.updateUser(id, newUser);
+    
     // const currentUser = await dao.findUserById(id);
     // req.session["currentUser"] = currentUser;
     res.json(status);
