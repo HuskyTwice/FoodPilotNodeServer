@@ -10,7 +10,11 @@ function BookmarksRoutes(app) {
         res.json(bookmarks);
     };
     const deleteUserBookmarksRestaurant = async (req, res) => {
-
+        const restaurantId = req.params.restaurantId;
+        const userId = req.params.userId;
+        console.log(restaurantId, userId);
+        const bookmarks = await dao.deleteUserBookmarksRestaurant(userId, restaurantId);
+        res.json(bookmarks);
     };
     const findUsersThatBookmarkRestaurant = async (req, res) => {
         const restaurantId = req.params.restaurantId;
