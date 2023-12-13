@@ -25,11 +25,15 @@ function UserRoutes(app) {
   };
 
   const updateUser = async (req, res) => {
-    const id = req.params.id;
+    //console.log("reqreceived");
+    const id = req.params.userId;
     const newUser = req.body;
-    const status = await dao.updateUser(id, newUser);
-    const currentUser = await dao.findUserById(id);
-    req.session["currentUser"] = currentUser;
+    // console.log("is the id?", req.params.userId);
+    // console.log("in routes, id is", id);
+    // console.log("in routes, newUser is", newUser);
+    // const status = await dao.updateUser(id, newUser);
+    // const currentUser = await dao.findUserById(id);
+    // req.session["currentUser"] = currentUser;
     res.json(status);
   };
 
@@ -48,10 +52,10 @@ function UserRoutes(app) {
   const signin = async (req, res) => {
     const { username, password } = req.body;
     const user = await dao.findUserByCredentials(username, password);
-    console.log(user);
+    // console.log(user);
     if (user) {
       const currentUser = user;
-      console.log(currentUser);
+      // console.log(currentUser);
       req.session["currentUser"] = currentUser;
       res.json(user);
     } else {
@@ -60,13 +64,7 @@ function UserRoutes(app) {
   };
 
   const signout = (req, res) => {
-    console.log("signin outt");
     req.session.destroy();
-    // app.get("/system/reboot", (req, res)=> {
-    //   console.log("here you are");
-    //   process.exit(1)
-    // })
-    console.log(req.account);
     res.json(200);
   };
 
