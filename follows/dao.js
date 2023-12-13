@@ -1,4 +1,4 @@
-import model from "./model";
+import model from "./model.js";
 
 // follower is the person who wants to follow another user.
 // followed is the person who is followed by another user.
