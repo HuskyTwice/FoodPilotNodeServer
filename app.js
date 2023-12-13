@@ -36,7 +36,7 @@ app.use(
         credentials: true, // support cookies
         // restrict cross origin resource sharing to the react application
         // origin: "http://localhost:3000"
-        origin: "https://deployment-3--endearing-gumption-a4c4af.netlify.app/"
+        origin: "https://deployment-3--endearing-gumption-a4c4af.netlify.app"
     })
 );
 const sessionOptions = {
