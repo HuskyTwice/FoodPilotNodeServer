@@ -10,6 +10,7 @@ function FollowsRoutes(app) {
     const userUnfollowsUser = async (req, res) => {
         const follower = req.session["currentUser"]._id;
         const followed = req.params["followed"];
+        // console.log("follower is ", follower, "followed is", followed);
         const status = await dao.userUnfollowsUser(follower, followed);
         res.json(status);
     };

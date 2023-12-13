@@ -11,7 +11,7 @@ function SearchRoutes(app) {
         const { location } = req.params;
         
         try {
-            console.log("Find Restaurants accessed.");
+            //console.log("Find Restaurants accessed.");
             const options = {
                 method: 'GET',
                 url: `${YELP_API}/search`,
@@ -23,7 +23,7 @@ function SearchRoutes(app) {
             };
             const response = await axios.request(options);
             const restaurants = response.data.businesses;
-            console.log(restaurants);
+            //console.log(restaurants);
             res.json(restaurants);
         } catch (error) {
             console.error(error);
